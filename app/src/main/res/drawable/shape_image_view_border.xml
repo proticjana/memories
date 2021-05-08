@@ -4,7 +4,7 @@
 
     <stroke
         android:width="@dimen/image_border_stroke_size"
-        android:color="@color/secondary_text_color" />
+        android:color="@color/secondaryText" />
 
     <solid android:color="@color/white" />
 
