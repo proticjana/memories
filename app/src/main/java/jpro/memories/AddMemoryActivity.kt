@@ -1,14 +1,22 @@
 package jpro.memories
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import jpro.memories.databinding.ActivityAddMemoryBinding
-import jpro.memories.databinding.ActivityMainBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
-class AddMemoryActivity : AppCompatActivity() {
+class AddMemoryActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var binding: ActivityAddMemoryBinding
+
+    private var cal = Calendar.getInstance()
+    private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityAddMemoryBinding.inflate(layoutInflater)
+        binding = ActivityAddMemoryBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -17,5 +25,34 @@ class AddMemoryActivity : AppCompatActivity() {
         binding.tbAddMemory.setNavigationOnClickListener {
             onBackPressed()
         }
+
+        dateSetListener = DatePickerDialog.OnDateSetListener {
+                _, year, month, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, month)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateDateInView()
+        }
+        binding.etDate.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when(v!!.id) {
+            R.id.et_date -> {
+                DatePickerDialog(
+                    this@AddMemoryActivity,
+                    dateSetListener,
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH)).show()
+            }
+        }
+    }
+
+    private fun updateDateInView() {
+        val dateFormat = "dd.MM.yyyy."
+        val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
+
+        binding.etDate.setText(sdf.format(cal.time).toString())
     }
 }
