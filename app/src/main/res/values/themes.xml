@@ -10,7 +10,7 @@
     </style>
 
     <style name="CustomNoActionBarTheme"
-        parent="@style/Theme.AppCompat.Light.NoActionBar">
+        parent="@style/Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/primaryDark</item>
         <item name="android:colorControlNormal">@color/primaryDark</item>
     </style>

@@ -12,9 +12,9 @@ class AddMemoryActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        setSupportActionBar(binding.toolbarAddMemory)
+        setSupportActionBar(binding.tbAddMemory)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbarAddMemory.setNavigationOnClickListener {
+        binding.tbAddMemory.setNavigationOnClickListener {
             onBackPressed()
         }
     }
