@@ -2,11 +2,14 @@ package jpro.memories.database
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import jpro.memories.models.MemoryModel
+import java.sql.SQLException
 
-class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DatabaseHandler(context: Context) :
+    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "MemoriesDatabase"
@@ -54,5 +57,35 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
         db.close()
         return result
+    }
+
+    fun getMemoriesList(): ArrayList<MemoryModel> {
+        val memories = ArrayList<MemoryModel>()
+        val selectQuery = "SELECT * FROM $TABLE_MEMORIES"
+        val db = this.readableDatabase
+
+        try {
+            val cursor: Cursor = db.rawQuery(selectQuery, null)
+
+            if(cursor.moveToFirst()) {
+                do {
+                    val memory = MemoryModel(
+                        cursor.getInt(cursor.getColumnIndex(KEY_ID)),
+                        cursor.getString(cursor.getColumnIndex(KEY_NAME)),
+                        cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION)),
+                        cursor.getString(cursor.getColumnIndex(KEY_DATE)),
+                        cursor.getString(cursor.getColumnIndex(KEY_LOCATION)),
+                        cursor.getDouble(cursor.getColumnIndex(KEY_LATITUDE)),
+                        cursor.getDouble(cursor.getColumnIndex(KEY_LONGITUDE))
+                    )
+                    memories.add(memory)
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+        } catch (e: SQLException) {
+            return ArrayList()
+        }
+
+        return memories
     }
 }
