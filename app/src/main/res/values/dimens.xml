@@ -4,7 +4,6 @@
     <dimen name="main_content_padding">16dp</dimen>
     <dimen name="et_text_size">16sp</dimen>
     <dimen name="btn_text_size">18sp</dimen>
-    <dimen name="btn_radius">10dp</dimen>
     <dimen name="no_memories_available_text_size">16sp</dimen>
     <dimen name="rv_marginTop">8dp</dimen>
 
@@ -16,8 +15,6 @@
     <dimen name="item_memory_cv_corner_radius">3dp</dimen>
     <dimen name="item_memory_cv_elevation">3dp</dimen>
     <dimen name="item_memories_content_padding">5dp</dimen>
-    <dimen name="item_memory_ll_marginStart">10dp</dimen>
-    <dimen name="item_memory_ll_marginEnd">2dp</dimen>
     <dimen name="item_memory_title_textSize">16sp</dimen>
     <dimen name="item_memory_description_textSize">14sp</dimen>
     <dimen name="item_memory_description_marginStart">8dp</dimen>
@@ -26,7 +23,6 @@
     <dimen name="memory_detail_marginStartEnd">8dp</dimen>
     <dimen name="memory_detail_marginTop">16dp</dimen>
     <dimen name="memory_detail_date_and_location_text_size">14sp</dimen>
-    <dimen name="memory_detail_latitude_and_longitude_marginStartEnd">2dp</dimen>
     <dimen name="memory_detail_description_text_size">18sp</dimen>
     <dimen name="memory_detail_description_marginStartEnd">16dp</dimen>
 </resources>

@@ -19,9 +19,6 @@ class AddMemoryActivity : AppCompatActivity(), View.OnClickListener {
     private var cal = Calendar.getInstance()
     private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
 
-    private var mLatitude: Double = 0.0
-    private var mLongitude: Double = 0.0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddMemoryBinding.inflate(layoutInflater)
@@ -82,8 +79,6 @@ class AddMemoryActivity : AppCompatActivity(), View.OnClickListener {
                             binding.etDescription.text.toString(),
                             binding.etDate.text.toString(),
                             binding.etLocation.text.toString(),
-                            mLatitude,
-                            mLongitude
                         )
                         val dbHandler = DatabaseHandler(this)
                         val addMemoryResult = dbHandler.addMemory(memoryModel)

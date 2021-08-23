@@ -69,39 +69,6 @@
                     android:textStyle="italic"
                     tools:text="Location" />
 
-                <TextView
-                    android:id="@+id/tv_latitude"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/memory_detail_marginStartEnd"
-                    android:layout_marginTop="@dimen/memory_detail_marginTop"
-                    android:layout_marginEnd="@dimen/memory_detail_latitude_and_longitude_marginStartEnd"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/memory_detail_date_and_location_text_size"
-                    android:textStyle="italic"
-                    tools:text="123.456" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/memory_detail_marginTop"
-                    android:text="@string/comma"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/memory_detail_date_and_location_text_size"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/tv_longitude"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/memory_detail_latitude_and_longitude_marginStartEnd"
-                    android:layout_marginTop="@dimen/memory_detail_marginTop"
-                    android:layout_marginEnd="@dimen/memory_detail_marginStartEnd"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/memory_detail_date_and_location_text_size"
-                    android:textStyle="italic"
-                    tools:text="-123.456" />
-
             </LinearLayout>
 
             <TextView

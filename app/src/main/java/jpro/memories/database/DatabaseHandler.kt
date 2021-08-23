@@ -21,8 +21,6 @@ class DatabaseHandler(context: Context) :
         private const val KEY_DESCRIPTION = "description"
         private const val KEY_DATE = "date"
         private const val KEY_LOCATION = "location"
-        private const val KEY_LATITUDE = "latitude"
-        private const val KEY_LONGITUDE = "longitude"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -31,9 +29,7 @@ class DatabaseHandler(context: Context) :
                 + "$KEY_NAME TEXT,"
                 + "$KEY_DESCRIPTION TEXT,"
                 + "$KEY_DATE TEXT,"
-                + "$KEY_LOCATION TEXT,"
-                + "$KEY_LATITUDE TEXT,"
-                + "$KEY_LONGITUDE TEXT)")
+                + "$KEY_LOCATION TEXT)")
         db?.execSQL(createMemoriesTable)
     }
 
@@ -50,8 +46,6 @@ class DatabaseHandler(context: Context) :
         contentValues.put(KEY_DESCRIPTION, memory.description)
         contentValues.put(KEY_DATE, memory.date)
         contentValues.put(KEY_LOCATION, memory.location)
-        contentValues.put(KEY_LATITUDE, memory.latitude)
-        contentValues.put(KEY_LONGITUDE, memory.longitude)
 
         val result = db.insert(TABLE_MEMORIES, null, contentValues)
 
@@ -75,8 +69,6 @@ class DatabaseHandler(context: Context) :
                         cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION)),
                         cursor.getString(cursor.getColumnIndex(KEY_DATE)),
                         cursor.getString(cursor.getColumnIndex(KEY_LOCATION)),
-                        cursor.getDouble(cursor.getColumnIndex(KEY_LATITUDE)),
-                        cursor.getDouble(cursor.getColumnIndex(KEY_LONGITUDE))
                     )
                     memories.add(memory)
                 } while (cursor.moveToNext())

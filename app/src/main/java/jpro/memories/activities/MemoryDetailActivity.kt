@@ -25,8 +25,6 @@ class MemoryDetailActivity : AppCompatActivity() {
             binding.tbMemoryDetail.setNavigationOnClickListener { onBackPressed() }
             binding.tvDate.text = memory.date
             binding.tvLocation.text = memory.location
-            binding.tvLatitude.text = memory.latitude.toString()
-            binding.tvLongitude.text = memory.longitude.toString()
             binding.tvDescription.text = memory.description
         }
     }

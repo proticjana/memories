@@ -8,18 +8,14 @@ data class MemoryModel(
     val name: String?,
     val description: String?,
     val date: String?,
-    val location: String?,
-    val latitude: Double,
-    val longitude: Double
+    val location: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
-        parcel.readDouble(),
-        parcel.readDouble()
+        parcel.readString()
     ) {
     }
 
@@ -29,8 +25,6 @@ data class MemoryModel(
         parcel.writeString(description)
         parcel.writeString(date)
         parcel.writeString(location)
-        parcel.writeDouble(latitude)
-        parcel.writeDouble(longitude)
     }
 
     override fun describeContents(): Int {
