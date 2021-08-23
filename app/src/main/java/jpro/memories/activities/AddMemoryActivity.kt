@@ -10,6 +10,7 @@ import jpro.memories.R
 import jpro.memories.database.DatabaseHandler
 import jpro.memories.databinding.ActivityAddMemoryBinding
 import jpro.memories.models.MemoryModel
+import kotlinx.android.synthetic.main.activity_add_memory.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,6 +19,8 @@ class AddMemoryActivity : AppCompatActivity(), View.OnClickListener {
 
     private var cal = Calendar.getInstance()
     private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
+
+    private var mMemoryDetails: MemoryModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,10 @@ class AddMemoryActivity : AppCompatActivity(), View.OnClickListener {
             onBackPressed()
         }
 
+        if (intent.hasExtra(MainActivity.MEMORY_DETAILS)) {
+            mMemoryDetails = intent.getParcelableExtra(MainActivity.MEMORY_DETAILS)
+        }
+
         dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, month)
@@ -38,6 +45,17 @@ class AddMemoryActivity : AppCompatActivity(), View.OnClickListener {
             updateDateInView()
         }
         updateDateInView()
+
+        if (mMemoryDetails != null) {
+            supportActionBar?.title = "Edit Memory"
+
+            binding.etName.setText(mMemoryDetails!!.name)
+            binding.etDescription.setText(mMemoryDetails!!.description)
+            binding.etDate.setText(mMemoryDetails!!.date)
+            binding.etLocation.setText(mMemoryDetails!!.location)
+
+            binding.btnSave.text = resources.getText(R.string.edit_new_memory)
+        }
 
         binding.etDate.setOnClickListener(this)
         binding.btnSave.setOnClickListener(this)
@@ -74,19 +92,30 @@ class AddMemoryActivity : AppCompatActivity(), View.OnClickListener {
 
                     else -> {
                         val memoryModel = MemoryModel(
-                            0,
+                            if (mMemoryDetails == null) 0 else mMemoryDetails!!.id,
                             binding.etName.text.toString(),
                             binding.etDescription.text.toString(),
                             binding.etDate.text.toString(),
                             binding.etLocation.text.toString(),
                         )
                         val dbHandler = DatabaseHandler(this)
-                        val addMemoryResult = dbHandler.addMemory(memoryModel)
 
-                        if (addMemoryResult > 0) {
-                            Toast.makeText(this, "New memory added", Toast.LENGTH_SHORT).show()
-                            setResult(Activity.RESULT_OK)
-                            finish()
+                        if (mMemoryDetails == null) {
+                            val addMemoryResult = dbHandler.addMemory(memoryModel)
+
+                            if (addMemoryResult > 0) {
+                                Toast.makeText(this, "New memory added", Toast.LENGTH_SHORT).show()
+                                setResult(Activity.RESULT_OK)
+                                finish()
+                            }
+                        } else {
+                            val updateMemoryResult = dbHandler.updateMemory(memoryModel)
+
+                            if (updateMemoryResult > 0) {
+                                Toast.makeText(this, "New memory added", Toast.LENGTH_SHORT).show()
+                                setResult(Activity.RESULT_OK)
+                                finish()
+                            }
                         }
                     }
                 }

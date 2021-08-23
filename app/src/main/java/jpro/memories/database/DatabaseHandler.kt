@@ -53,6 +53,22 @@ class DatabaseHandler(context: Context) :
         return result
     }
 
+    fun updateMemory(memory: MemoryModel): Int {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(KEY_NAME, memory.name)
+        contentValues.put(KEY_DESCRIPTION, memory.description)
+        contentValues.put(KEY_DATE, memory.date)
+        contentValues.put(KEY_LOCATION, memory.location)
+
+        val success = db.update(TABLE_MEMORIES, contentValues, KEY_ID + "=" + memory.id, null)
+
+        db.close()
+        return success
+    }
+
+
     fun getMemoriesList(): ArrayList<MemoryModel> {
         val memories = ArrayList<MemoryModel>()
         val selectQuery = "SELECT * FROM $TABLE_MEMORIES"

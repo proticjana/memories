@@ -3,9 +3,12 @@
     <color name="primary">#5FCCC5</color>
     <color name="primary_dark">#44938E</color>
     <color name="accent">#7b6079</color>
-    <color name="back">#77EDEFEF</color>
+
+    <color name="main_background">#77EDEFEF</color>
 
     <color name="white">#ffffff</color>
+    <color name="green">#4CAF50</color>
+
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#9AA2AF</color>
 </resources>
