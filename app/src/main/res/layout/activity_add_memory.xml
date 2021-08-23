@@ -47,8 +47,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/edit_text_hint_name"
                     android:inputType="textCapWords"
-                    android:textColor="@color/primaryText"
-                    android:textColorHint="@color/secondaryText"
+                    android:textColor="@color/primary_text"
+                    android:textColorHint="@color/secondary_text"
                     android:textSize="@dimen/et_text_size" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/add_memory_btn_save_marginTop"
-                android:backgroundTint="@color/primaryDark"
+                android:backgroundTint="@color/primary_dark"
                 android:gravity="center"
                 android:paddingTop="@dimen/add_memory_btn_save_paddingTopBottom"
                 android:paddingBottom="@dimen/add_memory_btn_save_paddingTopBottom"

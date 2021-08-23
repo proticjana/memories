@@ -67,7 +67,7 @@ class DatabaseHandler(context: Context) :
         try {
             val cursor: Cursor = db.rawQuery(selectQuery, null)
 
-            if(cursor.moveToFirst()) {
+            if (cursor.moveToFirst()) {
                 do {
                     val memory = MemoryModel(
                         cursor.getInt(cursor.getColumnIndex(KEY_ID)),
