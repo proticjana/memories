@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import jpro.memories.R
 import jpro.memories.activities.AddMemoryActivity
 import jpro.memories.activities.MainActivity
+import jpro.memories.database.DatabaseHandler
 import jpro.memories.models.MemoryModel
 import kotlinx.android.synthetic.main.item_memory.view.*
 
@@ -31,6 +32,18 @@ open class MemoryAdapter(
 
         // Update RecyclerView
         notifyItemChanged(position)
+    }
+
+    fun removeAt(position: Int) {
+        val dbHandler = DatabaseHandler(context)
+        val isDeleted = dbHandler.deleteMemory(memories[position])
+
+        if (isDeleted > 0) {
+            memories.removeAt(position)
+
+            // Update RecyclerView
+            notifyItemRemoved(position)
+        }
     }
 
     // Inflates the item views which is designed in xml layout file

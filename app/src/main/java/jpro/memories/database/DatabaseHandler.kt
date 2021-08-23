@@ -68,6 +68,14 @@ class DatabaseHandler(context: Context) :
         return success
     }
 
+    fun deleteMemory(memory: MemoryModel): Int {
+        val db = this.writableDatabase
+
+        val success = db.delete(TABLE_MEMORIES, KEY_ID + "=" + memory.id, null)
+
+        db.close()
+        return success
+    }
 
     fun getMemoriesList(): ArrayList<MemoryModel> {
         val memories = ArrayList<MemoryModel>()

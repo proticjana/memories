@@ -12,6 +12,7 @@ import jpro.memories.adapters.MemoryAdapter
 import jpro.memories.database.DatabaseHandler
 import jpro.memories.databinding.ActivityMainBinding
 import jpro.memories.models.MemoryModel
+import jpro.memories.utils.SwipeToDeleteCallback
 import jpro.memories.utils.SwipeToEditCallback
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -75,6 +76,18 @@ class MainActivity : AppCompatActivity() {
 
         val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)
         editItemTouchHelper.attachToRecyclerView(rv_memories_list)
+
+        val deleteSwipeHandler = object : SwipeToDeleteCallback(this) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                memoryAdapter.removeAt(viewHolder.adapterPosition)
+
+                // Update RecyclerView according to DB
+                getMemoriesFromDB()
+            }
+        }
+
+        val deleteItemTouchHelper = ItemTouchHelper(deleteSwipeHandler)
+        deleteItemTouchHelper.attachToRecyclerView(rv_memories_list)
     }
 
     private fun getMemoriesFromDB() {
