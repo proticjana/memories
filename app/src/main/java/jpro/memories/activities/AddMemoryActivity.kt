@@ -1,5 +1,6 @@
 package jpro.memories.activities
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
@@ -89,6 +90,7 @@ class AddMemoryActivity : AppCompatActivity(), View.OnClickListener {
 
                         if (addMemoryResult > 0) {
                             Toast.makeText(this, "New memory added", Toast.LENGTH_SHORT).show()
+                            setResult(Activity.RESULT_OK)
                             finish()
                         }
                     }

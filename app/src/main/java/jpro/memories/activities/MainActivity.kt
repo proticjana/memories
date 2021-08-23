@@ -2,6 +2,7 @@ package jpro.memories.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        var ADD_MEMORY_ACTIVITY_REQ_CODE = 1
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -21,10 +26,22 @@ class MainActivity : AppCompatActivity() {
 
         binding.fabAddMemory.setOnClickListener {
             val intent = Intent(this, AddMemoryActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, ADD_MEMORY_ACTIVITY_REQ_CODE)
         }
 
         getMemoriesFromDB()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == ADD_MEMORY_ACTIVITY_REQ_CODE) {
+            if (resultCode == RESULT_OK) {
+                getMemoriesFromDB()
+            } else {
+                Log.e("MainActivity", "Add memory cancelled or back pressed.")
+            }
+        }
     }
 
     private fun setupMemoriesRecyclerView(memoryList: ArrayList<MemoryModel>) {
