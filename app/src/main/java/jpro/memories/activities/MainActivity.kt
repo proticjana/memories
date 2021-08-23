@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var ADD_MEMORY_ACTIVITY_REQ_CODE = 1
+        var MEMORY_DETAILS = "memory_details"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +51,14 @@ class MainActivity : AppCompatActivity() {
 
         val memoryAdapter = MemoryAdapter(this, memoryList)
         rv_memories_list.adapter = memoryAdapter
+
+        memoryAdapter.setOnClickListener(object : MemoryAdapter.OnClickListener {
+            override fun onClick(position: Int, model: MemoryModel) {
+                val intent = Intent(this@MainActivity, MemoryDetailActivity::class.java)
+                intent.putExtra(MEMORY_DETAILS, model)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun getMemoriesFromDB() {

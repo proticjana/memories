@@ -14,6 +14,12 @@ open class MemoryAdapter(
     private var list: ArrayList<MemoryModel>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var onClickListener: OnClickListener? = null
+
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+
     // Inflates the item views which is designed in xml layout file
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MyViewHolder(
@@ -34,6 +40,12 @@ open class MemoryAdapter(
             holder.itemView.tv_date.text = model.date
             holder.itemView.tv_name.text = model.name
             holder.itemView.tv_description.text = model.description
+
+            holder.itemView.setOnClickListener {
+                if (onClickListener != null) {
+                    onClickListener!!.onClick(position, model)
+                }
+            }
         }
     }
 
@@ -42,8 +54,10 @@ open class MemoryAdapter(
         return list.size
     }
 
+    interface OnClickListener {
+        fun onClick(position: Int, model: MemoryModel)
+    }
 
     // A ViewHolder describes an item view and metadata about its place within the RecyclerView
     private class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
 }

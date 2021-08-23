@@ -8,4 +8,6 @@
     <string name="text_add_image">ADD IMAGE</string>
     <string name="btn_text_save">SAVE</string>
     <string name="no_memories_available_yet">No memories.</string>
+    <string name="at">\@</string>
+    <string name="comma">,</string>
 </resources>
