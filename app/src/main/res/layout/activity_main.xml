@@ -7,23 +7,37 @@
     android:background="@color/main_background"
     tools:context=".activities.MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_memories_list"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/rv_marginTop"
-        android:visibility="gone"
-        tools:visibility="gone" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_no_memories_available"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/no_memories_available_yet"
-        android:textSize="@dimen/no_memories_available_text_size"
-        android:visibility="visible"
-        tools:visibility="visible" />
+        <SearchView
+            android:id="@+id/sv_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search for a memory..." />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_memories_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/rv_marginTop"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_no_memories_available"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_memories_available_yet"
+            android:textSize="@dimen/no_memories_available_text_size"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_memory"
@@ -32,8 +46,8 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="@color/primary_dark"
-        app:tint="@color/white"
+        android:contentDescription="@string/add_new_memory"
         app:srcCompat="@drawable/ic_action_add_24dp"
-        android:contentDescription="@string/add_new_memory" />
+        app:tint="@color/white" />
 
 </FrameLayout>

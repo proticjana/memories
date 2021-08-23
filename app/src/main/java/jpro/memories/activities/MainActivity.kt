@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +34,21 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddMemoryActivity::class.java)
             startActivityForResult(intent, ADD_MEMORY_ACTIVITY_REQ_CODE)
         }
+
+        val searchView = binding.svMain
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                return queryDB(query)
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    searchView.clearFocus()
+                }
+                return queryDB(newText)
+            }
+        })
 
         getMemoriesFromDB()
     }
@@ -102,6 +118,25 @@ class MainActivity : AppCompatActivity() {
         } else {
             rv_memories_list.visibility = View.GONE
             tv_no_memories_available.visibility = View.VISIBLE
+        }
+    }
+
+    private fun queryDB(query: String?): Boolean {
+        val dbHandler = DatabaseHandler(this)
+        val memories: ArrayList<MemoryModel> = dbHandler.queryMemoriesList(query)
+
+        if (memories.isNotEmpty()) {
+            rv_memories_list.visibility = View.VISIBLE
+            tv_no_memories_available.visibility = View.GONE
+
+            setupMemoriesRecyclerView(memories)
+
+            return true
+        } else {
+            rv_memories_list.visibility = View.GONE
+            tv_no_memories_available.visibility = View.VISIBLE
+
+            return false
         }
     }
 }

@@ -104,4 +104,40 @@ class DatabaseHandler(context: Context) :
 
         return memories
     }
+
+    fun queryMemoriesList(query: String?): ArrayList<MemoryModel> {
+        if (query.isNullOrEmpty()) {
+            return getMemoriesList()
+        }
+
+        val memories = ArrayList<MemoryModel>()
+        val selectQuery = "SELECT * FROM $TABLE_MEMORIES WHERE " +
+                "$KEY_NAME like \"%$query%\" OR " +
+                "$KEY_DESCRIPTION like \"%$query%\" OR " +
+                "$KEY_DATE like \"%$query%\" OR " +
+                "$KEY_LOCATION like \"%$query%\""
+        val db = this.readableDatabase
+
+        try {
+            val cursor: Cursor = db.rawQuery(selectQuery, null)
+
+            if (cursor.moveToFirst()) {
+                do {
+                    val memory = MemoryModel(
+                        cursor.getInt(cursor.getColumnIndex(KEY_ID)),
+                        cursor.getString(cursor.getColumnIndex(KEY_NAME)),
+                        cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION)),
+                        cursor.getString(cursor.getColumnIndex(KEY_DATE)),
+                        cursor.getString(cursor.getColumnIndex(KEY_LOCATION)),
+                    )
+                    memories.add(memory)
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+        } catch (e: SQLException) {
+            return ArrayList()
+        }
+
+        return memories
+    }
 }
