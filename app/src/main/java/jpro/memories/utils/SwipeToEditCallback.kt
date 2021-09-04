@@ -82,7 +82,7 @@ abstract class SwipeToEditCallback(context: Context) :
         val editIconRight = itemView.left + editIconMargin
         val editIconBottom = editIconTop + intrinsicHeight
 
-        // Draw the delete icon
+        // Draw the edit icon
         editIcon!!.setBounds(editIconLeft, editIconTop, editIconRight, editIconBottom)
         editIcon.draw(c)
 

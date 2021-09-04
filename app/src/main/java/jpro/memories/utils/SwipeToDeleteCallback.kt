@@ -78,8 +78,8 @@ abstract class SwipeToDeleteCallback(context: Context) :
         // Calculate position of delete icon
         val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
         val deleteIconMargin = (itemHeight - intrinsicHeight)
-        val deleteIconLeft = itemView.right + deleteIconMargin - intrinsicWidth
-        val deleteIconRight = itemView.right + deleteIconMargin
+        val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth
+        val deleteIconRight = itemView.right - deleteIconMargin
         val deleteIconBottom = deleteIconTop + intrinsicHeight
 
         // Draw the delete icon

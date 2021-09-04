@@ -112,7 +112,7 @@ class AddMemoryActivity : AppCompatActivity(), View.OnClickListener {
                             val updateMemoryResult = dbHandler.updateMemory(memoryModel)
 
                             if (updateMemoryResult > 0) {
-                                Toast.makeText(this, "New memory added", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Memory updated", Toast.LENGTH_SHORT).show()
                                 setResult(Activity.RESULT_OK)
                                 finish()
                             }

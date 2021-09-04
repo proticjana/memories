@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         val editSwipeHandler = object : SwipeToEditCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val memoryAdapter = rv_memories_list.adapter as MemoryAdapter
                 memoryAdapter.notifyEditItem(
                     this@MainActivity,
                     viewHolder.adapterPosition,
@@ -95,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
         val deleteSwipeHandler = object : SwipeToDeleteCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val memoryAdapter = rv_memories_list.adapter as MemoryAdapter
                 memoryAdapter.removeAt(viewHolder.adapterPosition)
 
                 // Update RecyclerView according to DB

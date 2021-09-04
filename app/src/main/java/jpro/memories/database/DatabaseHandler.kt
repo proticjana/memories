@@ -79,7 +79,7 @@ class DatabaseHandler(context: Context) :
 
     fun getMemoriesList(): ArrayList<MemoryModel> {
         val memories = ArrayList<MemoryModel>()
-        val selectQuery = "SELECT * FROM $TABLE_MEMORIES"
+        val selectQuery = "SELECT * FROM $TABLE_MEMORIES ORDER BY $KEY_ID DESC"
         val db = this.readableDatabase
 
         try {
